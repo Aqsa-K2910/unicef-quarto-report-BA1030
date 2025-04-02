@@ -1,0 +1,54 @@
+---
+title: "UNICEF Data Report"
+author: "Aqsa Kafeel"
+date: 02/04/2025
+format: 
+  html:
+    toc: true    # Table of contents
+    code-fold: true  # Hide/show code blocks
+execute:
+  echo: true   # Show code output in report
+  eval: true   # Ensure code runs
+  warning: false  # Hide warnings
+---
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+import geopandas as gpd
+import plotnine as p9
+
+# Display message to confirm Python is running
+print("Python environment is working correctly!")
+```
+
+```{python}
+# Load the UNICEF data (update filename if necessary)
+df = pd.read_csv(r"C:\Users\ayanc\Downloads\unicef_indicator_2.csv")
+
+
+# Display the first few rows
+print(df.head())
+```
+
+
+```{python}
+import matplotlib.pyplot as plt
+
+# Create a bar chart using correct column names
+plt.figure(figsize=(12, 5))
+plt.bar(df['country'], df['obs_value'], color='pink')  # Correct column name
+plt.xlabel('Country')
+plt.ylabel('Observed Value')  # Update the label accordingly
+plt.title('UNICEF Data Analysis')
+plt.xticks(rotation=90)
+plt.show()
+
+```
+```{python}
+p = (p9.ggplot(df, p9.aes(x='time_period', y='obs_value', color='country'))
+     + p9.geom_point()
+     + p9.theme_minimal())
+p
+```
+
