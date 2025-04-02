@@ -45,10 +45,30 @@ plt.xticks(rotation=90)
 plt.show()
 
 ```
+
+
 ```{python}
-p = (p9.ggplot(df, p9.aes(x='time_period', y='obs_value', color='country'))
-     + p9.geom_point()
-     + p9.theme_minimal())
-p
+plt.figure(figsize=(8, 5))
+plt.hist(df['obs_value'], bins=20, color='skyblue', edgecolor='black')
+
+plt.xlabel('Observed Value')
+plt.ylabel('Frequency')
+plt.title('Distribution of Observed Values')
+plt.show()
 ```
+
+```{python}
+# Group by country and sum the obs_value
+top_countries = df.groupby('country')['obs_value'].sum().nlargest(10)
+
+plt.figure(figsize=(10, 6))
+top_countries.plot(kind='bar', color='orange')
+
+plt.xlabel('Country')
+plt.ylabel('Total Observed Value')
+plt.title('Top 10 Countries by Observed Value')
+plt.xticks(rotation=45)
+plt.show()
+```
+
 
